@@ -1,0 +1,26 @@
+name: Build Geode Mod - Android64
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    name: Android64
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build mod
+        uses: geode-sdk/build-geode-mod@main
+        id: build
+        with:
+          target: Android64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrajectoryBot-Android64
+          path: ${{ steps.build.outputs.build-output }}
